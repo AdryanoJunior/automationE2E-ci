@@ -1,3 +1,5 @@
+import userData from '../fixtures/userData.json'
+
 describe('Orange HRM - Tests', () => {
 
   const selectorsList = {
@@ -28,17 +30,6 @@ describe('Orange HRM - Tests', () => {
 
   }
 
-  const userData = {
-    userSuccess: {
-      username: 'Admin',
-      password: 'admin123'
-    },
-    userFail: {
-      username: 'TestUserFail',
-      password: 'wrongPassword'
-    }
-  }
-
   it('User Info Update - Success', () => {
     cy.visit('/auth/login')
     cy.get(selectorsList.usernameField).type(userData.userSuccess.username)
@@ -64,7 +55,7 @@ describe('Orange HRM - Tests', () => {
     cy.get(selectorsList.genderImput).eq(0).click()
     cy.get(selectorsList.comboBoxBloodType).click()
     cy.get(selectorsList.selectBloodType).click()
-    cy.get(selectorsList.testField).clear().type('0001')
+    cy.get(selectorsList.testField).eq(1).clear().type('0001')
     cy.get(selectorsList.saveButton).eq(1).click()
     cy.get('body').should('contain', 'Successfully Saved')
     cy.get(selectorsList.contactDetailsButton).click()
@@ -80,7 +71,7 @@ describe('Orange HRM - Tests', () => {
     cy.get(selectorsList.saveButton).click()
     cy.get('body').should('contain', 'Successfully Updated')
   })
-  it.only('Login - Fail', () => {
+  it('Login - Fail', () => {
     cy.visit('/auth/login')
     cy.get(selectorsList.usernameField).type(userData.userFail.username)
     cy.get(selectorsList.passwordField).type(userData.userFail.password)
