@@ -23,14 +23,26 @@ describe('Orange HRM - Tests', () => {
     saveButton: "[type='submit']",
     contactDetailsButton: "[href='/web/index.php/pim/contactDetails/empNumber/7']",
     comboBoxCountry: '.oxd-select-text-input',
-    selectCountry: ':nth-child(31)'
+    selectCountry: ':nth-child(31)',
+    wrongAlertError: '.oxd-alert'
 
+  }
+
+  const userData = {
+    userSuccess: {
+      username: 'Admin',
+      password: 'admin123'
+    },
+    userFail: {
+      username: 'TestUserFail',
+      password: 'wrongPassword'
+    }
   }
 
   it('User Info Update - Success', () => {
     cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField).type('Admin')
-    cy.get(selectorsList.passwordField).type('admin123')
+    cy.get(selectorsList.usernameField).type(userData.userSuccess.username)
+    cy.get(selectorsList.passwordField).type(userData.userSuccess.password)
     cy.get(selectorsList.loginButton).click()
     cy.location('pathname').should('contains', '/dashboard')
     cy.get(selectorsList.myInfoButton).click()
@@ -68,4 +80,12 @@ describe('Orange HRM - Tests', () => {
     cy.get(selectorsList.saveButton).click()
     cy.get('body').should('contain', 'Successfully Updated')
   })
+  it.only('Login - Fail', () => {
+    cy.visit('/auth/login')
+    cy.get(selectorsList.usernameField).type(userData.userFail.username)
+    cy.get(selectorsList.passwordField).type(userData.userFail.password)
+    cy.get(selectorsList.loginButton).click()
+    cy.get(selectorsList.wrongAlertError)
+    cy.get('body').should('contain', 'Invalid credentials')
+  });
 })
