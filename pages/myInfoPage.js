@@ -14,10 +14,11 @@ class MyInfoPage {
             selectMaritalStatus: ':nth-child(3) > span',
             dateOfBirth: ':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input',
             genderImput: ".oxd-radio-input",
-            comboBoxBloodType: '.oxd-grid-3 > :nth-child(3)',
+            comboBoxBloodType: '.orangehrm-card-container > .oxd-form > .oxd-form-row > .oxd-grid-3 > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input',
             selectBloodType: ':nth-child(4) > span',
             testField: '.orangehrm-card-container > .oxd-form > .oxd-form-row > .oxd-grid-3 > :nth-child(2)',
             saveButton: "[type='submit']",
+            
             
         }
         return selectors
