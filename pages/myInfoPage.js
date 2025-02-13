@@ -14,10 +14,11 @@ class MyInfoPage {
             selectMaritalStatus: ':nth-child(3) > span',
             dateOfBirth: ':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input',
             genderImput: ".oxd-radio-input",
-            comboBoxBloodType: '.orangehrm-card-container > .oxd-form > .oxd-form-row > .oxd-grid-3 > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text > .oxd-select-text-input',
+            comboBoxBloodType: '.oxd-grid-3 > :nth-child(3)',
             selectBloodType: ':nth-child(4) > span',
             testField: '.orangehrm-card-container > .oxd-form > .oxd-form-row > .oxd-grid-3 > :nth-child(2)',
             saveButton: "[type='submit']",
+            
         }
         return selectors
     }
@@ -39,7 +40,7 @@ class MyInfoPage {
         cy.get(this.selectorsList().dateOfBirth).clear().type('2002-12-11')
         cy.get(this.selectorsList().closeButton).click()
         cy.get(this.selectorsList().genderImput).eq(0).click()
-        cy.get(this.selectorsList().comboBoxBloodType).click()
+        cy.get(this.selectorsList().comboBoxBloodType).click({ multiple: true })
         cy.get(this.selectorsList().selectBloodType).click()
         cy.get(this.selectorsList().testField).type('1999')
         cy.get(this.selectorsList().saveButton).eq(1).click()
