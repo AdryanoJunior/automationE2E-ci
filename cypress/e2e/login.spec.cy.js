@@ -2,6 +2,7 @@ import userData from '../fixtures/userData.json'
 import LoginPage from '../../pages/loginPage'
 import MyInfoPage from '../../pages/myInfoPage'
 import ContactDetailsPage from '../../pages/contactDetailsPage'
+import { faker } from '@faker-js/faker';
 
 const loginPage = new LoginPage()
 const myInfoPage = new MyInfoPage()
@@ -15,10 +16,10 @@ describe('Orange HRM - Tests', () => {
 
     cy.location('pathname').should('contains', '/dashboard')
 
-    myInfoPage.fillPersonalDetails('Adryano', 'Vital', 'Junior')
+    myInfoPage.fillPersonalDetails(faker.person.firstName(), faker.person.middleName(), faker.person.lastName())
     cy.get('body').should('contain', 'Successfully Saved')
 
-    contactDetailsPage.fillContactDetails()
+    contactDetailsPage.fillContactDetails(faker.location.streetAddress(), faker.location.streetAddress(), faker.location.city(), faker.location.state(), faker.location.zipCode(), faker.phone.imei(), faker.internet.email())
     cy.get('body').should('contain', 'Successfully Updated')
   })
 
